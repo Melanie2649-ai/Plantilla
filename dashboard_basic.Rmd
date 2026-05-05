@@ -12,28 +12,36 @@ library(flexdashboard) # always
 
 <!-- links -->
 ```{r}
-map1link=
+map1link="https://github.com/Melanie2649-ai/Plantilla/raw/main/map1.rds"
 viz1=url(map1link)
 
-map2link=
+map2link="https://github.com/Melanie2649-ai/Plantilla/raw/main/map2.rds"
 viz2=url(map2link)
+
+map3link="https://github.com/Melanie2649-ai/Plantilla/raw/main/map3.rds"
+viz3=url(map3link)
 ```
 
 ## Intro {.sidebar}
+En este análisis, presentamos tres mapas temáticos que proporcionan información sobre el uso de teléfonos móviles en América del Norte, América del Sur y América Central y el Caribe. Estos mapas ayudan a visualizar la distribución de los usuarios de teléfonos móviles en las regiones, lo que es esencial para comprender el nivel de penetración móvil y el desarrollo de la infraestructura.
 
-I can give some textual explanation here!
+Mapa Choropleth: Este mapa utiliza el número absoluto de suscriptores móviles en cada país, visualizado a través de un gradiente de colores. La intensidad del color representa el rango de usuarios móviles en las regiones, destacando los países con las tasas más altas de suscripción móvil.
+
+DMM: Este mapa muestra la densidad relativa de usuarios móviles, representada por puntos en el mapa. Cada punto corresponde a una cierta cantidad de usuarios móviles, lo que permite ver de manera más clara la distribución móvil a un nivel más detallado y revela áreas con una infraestructura móvil significativa o con carencias.
+
+PSM: Este mapa utiliza círculos cuyo tamaño es proporcional al número de suscriptores móviles en cada país. El PSM ofrece una señal visual inmediata de las diferencias en la densidad de usuarios móviles entre los países, facilitando la comparación de la escala de suscripciones móviles.
 
 
 ## Column {data-width="450"}
 
-### GIVE ME A TITLE 1 <!-- a title for plot -->
+### DOT MOBILES MAP 
 
 ```{r}
 
 readRDS(viz1)
 ```
 
-### GIVE ME A TITLE 2
+### PROPORTIONAL SYMBOL MAP
 
 ```{r}
 
@@ -42,10 +50,10 @@ readRDS(viz2)
 
 ## Column {data-width="550"}
 
-### GIVE ME A TITLE 3
+### CHOROPLETH
 
 ```{r}
-readRDS(viz1)
+readRDS(viz3)
 ```
 
 ### GIVE ME A TITLE 4
