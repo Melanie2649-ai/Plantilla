@@ -18,6 +18,9 @@ viz1=url(map1link)
 map2link="https://github.com/Melanie2649-ai/Plantilla/raw/main/map2.rds"
 viz2=url(map2link)
 
+map3link="https://github.com/Melanie2649-ai/Plantilla/raw/main/map4.rds"
+viz3=url(map3link)
+
 map4link="https://github.com/Melanie2649-ai/Plantilla/raw/main/map4.rds"
 viz4=url(map4link)
 ```
@@ -53,11 +56,11 @@ readRDS(viz2)
 ### CHOROPLETH
 
 ```{r}
-readRDS(viz4)
+readRDS(viz3)
 ```
 
 ### GIVE ME A TITLE 4
 
 ```{r}
-readRDS(viz2)
+readRDS(viz3)
 ```
