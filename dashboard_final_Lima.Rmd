@@ -1,0 +1,217 @@
+---
+title: "Dashboard LISA - Distritos del Departamento de Lima"
+author: "Melanie2649-ai"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    theme: flatly
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(knitr)
+```
+
+```{r rutas, include=FALSE}
+# En esta parte llamo las imágenes que ya subí a mi GitHub.
+# Uso el enlace raw porque así R puede leer directamente la imagen.
+
+repo <- "https://raw.githubusercontent.com/Melanie2649-ai/Plantilla/main/"
+
+mapa_base <- paste0(repo, "mapa_base_educacion_lima.png")
+mapa_rook <- paste0(repo, "mapa_lisa_rook_lima.png")
+mapa_queen <- paste0(repo, "mapa_lisa_queen_lima.png")
+mapa_knn5 <- paste0(repo, "mapa_lisa_knn5_lima.png")
+mapa_distance <- paste0(repo, "mapa_lisa_distance_band_lima.png")
+```
+
+Introducción
+=====================================
+
+Row
+-------------------------------------
+
+### ¿Qué estoy mostrando?
+
+En este dashboard presento los resultados del análisis **LISA** para los distritos del departamento de **Lima**.
+
+La variable usada es:
+
+> `Educ_sec_comp2019_pct`
+
+Esta variable representa el porcentaje de población con secundaria completa en el año 2019.
+
+Lo importante del dashboard es que los cuatro mapas usan la misma data y la misma variable. Lo que cambia es la forma de definir los vecinos espaciales.
+
+Row
+-------------------------------------
+
+### Tipos de vecindario usados
+
+| Mapa | Tipo de vecindario | Interpretación |
+|---|---|---|
+| 1 | Rook | Considera vecinos a los distritos que comparten borde. |
+| 2 | Queen | Considera vecinos a los distritos que comparten borde o punto. |
+| 3 | KNN k=5 | Cada distrito se compara con sus cinco distritos más cercanos. |
+| 4 | Distance Band | Considera vecinos a los distritos ubicados dentro de un radio de distancia. |
+
+Mapa base
+=====================================
+
+Row
+-------------------------------------
+
+### Distribución de la variable en Lima
+
+```{r}
+include_graphics(mapa_base)
+```
+
+Row
+-------------------------------------
+
+### Comentario
+
+Antes de revisar los mapas LISA, muestro el mapa base de la variable.  
+Este mapa permite observar cómo se distribuye el porcentaje de población con secundaria completa en los distritos de Lima.
+
+Sin embargo, el mapa base solo muestra valores individuales.  
+Por eso, después aplico LISA, porque me permite observar si esos valores forman agrupamientos espaciales o valores atípicos frente a sus vecinos.
+
+Dashboard LISA
+=====================================
+
+Row
+-------------------------------------
+
+### Mapa 1: Rook
+
+```{r}
+include_graphics(mapa_rook)
+```
+
+### Mapa 2: Queen
+
+```{r}
+include_graphics(mapa_queen)
+```
+
+Row
+-------------------------------------
+
+### Mapa 3: KNN k=5
+
+```{r}
+include_graphics(mapa_knn5)
+```
+
+### Mapa 4: Distance Band
+
+```{r}
+include_graphics(mapa_distance)
+```
+
+Rook
+=====================================
+
+Row
+-------------------------------------
+
+### LISA con vecindario Rook
+
+```{r}
+include_graphics(mapa_rook)
+```
+
+Row
+-------------------------------------
+
+### Interpretación
+
+En el vecindario **Rook**, considero vecinos solo a los distritos que comparten un borde.
+
+Este criterio es más estricto porque no basta con tocarse en una esquina.  
+Por eso, el resultado puede mostrar menos relaciones espaciales que otros métodos.
+
+Queen
+=====================================
+
+Row
+-------------------------------------
+
+### LISA con vecindario Queen
+
+```{r}
+include_graphics(mapa_queen)
+```
+
+Row
+-------------------------------------
+
+### Interpretación
+
+En el vecindario **Queen**, considero vecinos a los distritos que comparten borde o punto.
+
+Este criterio es más flexible que Rook.  
+Por eso, algunos distritos pueden cambiar de categoría, ya que tienen más vecinos considerados en el cálculo.
+
+KNN k=5
+=====================================
+
+Row
+-------------------------------------
+
+### LISA con K vecinos más cercanos
+
+```{r}
+include_graphics(mapa_knn5)
+```
+
+Row
+-------------------------------------
+
+### Interpretación
+
+En el método **KNN k=5**, cada distrito se relaciona con sus cinco distritos más cercanos.
+
+Este método no depende de si los distritos comparten borde.  
+Por eso, es útil cuando se quiere comparar por cercanía espacial y evitar distritos sin vecinos.
+
+Distance Band
+=====================================
+
+Row
+-------------------------------------
+
+### LISA con banda de distancia
+
+```{r}
+include_graphics(mapa_distance)
+```
+
+Row
+-------------------------------------
+
+### Interpretación
+
+En **Distance Band**, considero vecinos a los distritos que están dentro de un radio de distancia.
+
+A diferencia de KNN, aquí no todos los distritos tienen necesariamente la misma cantidad de vecinos.  
+El resultado depende del radio elegido para definir la relación espacial.
+
+Conclusión
+=====================================
+
+Row
+-------------------------------------
+
+### Comentario final
+
+Los cuatro mapas LISA muestran que el resultado espacial no depende únicamente de la variable analizada.
+
+También depende de cómo defino el vecindario espacial.
+
+Por eso, un distrito puede aparecer como `hotSpot`, `coldSpot`, `hotOutlier`, `coldOutlier` o `no_pattern` según el criterio usado para calcular sus vecinos.
+
+En este trabajo, el dashboard permite comparar visualmente esas diferencias entre Rook, Queen, KNN k=5 y Distance Band.
